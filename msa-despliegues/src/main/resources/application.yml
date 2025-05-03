@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: msa-despliegues
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/despliegue_db
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      schema: public

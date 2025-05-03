@@ -1,0 +1,42 @@
+# Archivos específicos de Maven
+**/target/
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# Archivos específicos de Spring Boot
+**/HELP.md
+
+# Archivos específicos de STS
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
+
+# Archivos específicos de IntelliJ IDEA
+**/.idea
+**/*.iws
+**/*.iml
+**/*.ipr
+
+# Archivos específicos de NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/build/
+
+# Archivos específicos de VS Code
+**/.vscode/
+
+# Excepciones
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
