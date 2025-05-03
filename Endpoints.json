@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "8b56fb2f-480c-40fa-9083-cc5a36914a56",
+		"name": "ENDPOINTS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2878900"
+	},
+	"item": [
+		{
+			"name": "GENERACION_CODIGO",
+			"item": [
+				{
+					"name": "DESPLIEGUES",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/despliegues",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/despliegues/2b6e7d2c-c593-475f-8340-801d6f592a3a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues",
+										"2b6e7d2c-c593-475f-8340-801d6f592a3a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByProjectId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/despliegues/proyectos/e8a02b61-75db-4d38-b1cd-c125e37a5892",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues",
+										"proyectos",
+										"e8a02b61-75db-4d38-b1cd-c125e37a5892"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByMaquinaId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/despliegues/maquinas/1a1cf4a1-a804-4d89-a480-7dfb2df45067",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues",
+										"maquinas",
+										"1a1cf4a1-a804-4d89-a480-7dfb2df45067"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createDespliegue",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"proyectoId\": \"24c6e0d9-b343-481b-9bb5-92ccb0167d2e\",\n    \"maquinaId\": \"c13e1302-d2eb-4f79-87f4-d67097afe0ea\",\n    \"fechaDespliegue\": \"2025-05-01\",\n    \"activo\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/despliegues",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateDespliegue",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"proyectoId\": \"74c6d650-4a61-462c-9a52-35120c573702\",\n    \"maquinaId\": \"c13e1302-d2eb-4f79-87f4-d67097afe0ea\",\n    \"fechaDespliegue\": \"2025-05-01\",\n    \"activo\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/despliegues/2b6e7d2c-c593-475f-8340-801d6f592a3a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues",
+										"2b6e7d2c-c593-475f-8340-801d6f592a3a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteDespliegue",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/despliegues/2b6e7d2c-c593-475f-8340-801d6f592a3a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"despliegues",
+										"2b6e7d2c-c593-475f-8340-801d6f592a3a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
