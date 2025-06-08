@@ -32,4 +32,14 @@ public class Proyecto {
     private LocalDate fechainicio;
 
     private boolean activo;
+    // ✅ Constructor por defecto requerido por JPA/Hibernate
+    public Proyecto() {
+    }
+    public Proyecto(String nombre, String descripcion, LocalDate fechainicio, boolean activo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechainicio = fechainicio;
+        this.activo = activo;
+    }
+
 }
