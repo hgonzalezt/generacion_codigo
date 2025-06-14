@@ -1,13 +1,11 @@
 package msa_proyectos.entities;
 
-import jakarta.persistence.Entity;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
-import lombok.*;
-
+import jakarta.persistence.Entity;
 import java.time.LocalDate;
 import java.util.UUID;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Entity
@@ -20,26 +18,26 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Table(name = "proyecto")
 public class Proyecto {
 
-    @Id
-    @GeneratedValue
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    private UUID id;
+  @Id
+  @GeneratedValue
+  @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+  private UUID id;
 
-    private String nombre;
+  private String nombre;
 
-    private String descripcion;
+  private String descripcion;
 
-    private LocalDate fechainicio;
+  private LocalDate fechainicio;
 
-    private boolean activo;
-    // ✅ Constructor por defecto requerido por JPA/Hibernate
-    public Proyecto() {
-    }
-    public Proyecto(String nombre, String descripcion, LocalDate fechainicio, boolean activo) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fechainicio = fechainicio;
-        this.activo = activo;
-    }
+  private boolean activo;
 
+  // ✅ Constructor por defecto requerido por JPA/Hibernate
+  public Proyecto() {}
+
+  public Proyecto(String nombre, String descripcion, LocalDate fechainicio, boolean activo) {
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.fechainicio = fechainicio;
+    this.activo = activo;
+  }
 }
