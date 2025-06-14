@@ -1,4 +1,3 @@
 package msa_proyectos.service;
 
-public class ProyectoServiceTest {
-}
+public class ProyectoServiceTest {}
