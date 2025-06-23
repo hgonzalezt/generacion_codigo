@@ -1,9 +1,18 @@
 package com.msa.despliegues.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.msa.despliegues.dto.GenericResponse;
 import com.msa.despliegues.repository.model.Despliegue;
 import com.msa.despliegues.service.IDespliegueService;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,25 +24,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 @ExtendWith(MockitoExtension.class)
 @DisplayName("DespliegueController Tests")
 class DespliegueControllerTest {
 
-  @Mock
-  private IDespliegueService service;
+  @Mock private IDespliegueService service;
 
-  @InjectMocks
-  private DespliegueController controller;
+  @InjectMocks private DespliegueController controller;
 
   private MockMvc mockMvc;
   private ObjectMapper objectMapper;
@@ -78,7 +75,8 @@ class DespliegueControllerTest {
 
     when(service.getAll()).thenReturn(response);
 
-    mockMvc.perform(get("/despliegues"))
+    mockMvc
+        .perform(get("/despliegues"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Despliegues obtenidos exitosamente"));
@@ -91,7 +89,8 @@ class DespliegueControllerTest {
   void testGetById_ShouldReturnDespliegueById() throws Exception {
     when(service.getById(testId)).thenReturn(successResponse);
 
-    mockMvc.perform(get("/despliegues/{id}", testId))
+    mockMvc
+        .perform(get("/despliegues/{id}", testId))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Operación realizada exitosamente"));
@@ -100,11 +99,13 @@ class DespliegueControllerTest {
   }
 
   @Test
-  @DisplayName("GET /despliegues/proyectos/{proyectoId} - Debería retornar despliegues por proyecto")
+  @DisplayName(
+      "GET /despliegues/proyectos/{proyectoId} - Debería retornar despliegues por proyecto")
   void testGetByProyectoId_ShouldReturnDesplieguesByProyecto() throws Exception {
     when(service.getByProyectoId(proyectoId)).thenReturn(successResponse);
 
-    mockMvc.perform(get("/despliegues/proyectos/{proyectoId}", proyectoId))
+    mockMvc
+        .perform(get("/despliegues/proyectos/{proyectoId}", proyectoId))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Operación realizada exitosamente"));
@@ -117,7 +118,8 @@ class DespliegueControllerTest {
   void testGetByMaquinaId_ShouldReturnDesplieguesByMaquina() throws Exception {
     when(service.getByMaquinaId(maquinaId)).thenReturn(successResponse);
 
-    mockMvc.perform(get("/despliegues/maquinas/{maquinaId}", maquinaId))
+    mockMvc
+        .perform(get("/despliegues/maquinas/{maquinaId}", maquinaId))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Operación realizada exitosamente"));
@@ -130,9 +132,11 @@ class DespliegueControllerTest {
   void testCreateDespliegue_Success_ShouldReturnCreated() throws Exception {
     when(service.createDespliegue(any(Despliegue.class))).thenReturn(successResponse);
 
-    mockMvc.perform(post("/despliegues")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(despliegue)))
+    mockMvc
+        .perform(
+            post("/despliegues")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(despliegue)))
         .andExpect(status().isCreated())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Operación realizada exitosamente"));
@@ -145,9 +149,11 @@ class DespliegueControllerTest {
   void testCreateDespliegue_Failure_ShouldReturnBadRequest() throws Exception {
     when(service.createDespliegue(any(Despliegue.class))).thenReturn(errorResponse);
 
-    mockMvc.perform(post("/despliegues")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(despliegue)))
+    mockMvc
+        .perform(
+            post("/despliegues")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(despliegue)))
         .andExpect(status().isBadRequest())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Error interno"));
@@ -160,9 +166,11 @@ class DespliegueControllerTest {
   void testUpdateDespliegue_Success_ShouldReturnOk() throws Exception {
     when(service.updateDespliegue(eq(testId), any(Despliegue.class))).thenReturn(successResponse);
 
-    mockMvc.perform(put("/despliegues/{id}", testId)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(despliegue)))
+    mockMvc
+        .perform(
+            put("/despliegues/{id}", testId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(despliegue)))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Operación realizada exitosamente"));
@@ -175,9 +183,11 @@ class DespliegueControllerTest {
   void testUpdateDespliegue_NotFound_ShouldReturnNotFound() throws Exception {
     when(service.updateDespliegue(eq(testId), any(Despliegue.class))).thenReturn(notFoundResponse);
 
-    mockMvc.perform(put("/despliegues/{id}", testId)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(despliegue)))
+    mockMvc
+        .perform(
+            put("/despliegues/{id}", testId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(despliegue)))
         .andExpect(status().isNotFound())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Despliegue no encontrado"));
@@ -190,9 +200,11 @@ class DespliegueControllerTest {
   void testUpdateDespliegue_Failure_ShouldReturnBadRequest() throws Exception {
     when(service.updateDespliegue(eq(testId), any(Despliegue.class))).thenReturn(errorResponse);
 
-    mockMvc.perform(put("/despliegues/{id}", testId)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(despliegue)))
+    mockMvc
+        .perform(
+            put("/despliegues/{id}", testId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(despliegue)))
         .andExpect(status().isBadRequest())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Error interno"));
@@ -205,18 +217,19 @@ class DespliegueControllerTest {
   void testDeleteDespliegue_Success_ShouldReturnNoContent() throws Exception {
     when(service.deleteDespliegue(testId)).thenReturn(successResponse);
 
-    mockMvc.perform(delete("/despliegues/{id}", testId))
-        .andExpect(status().isNoContent());
+    mockMvc.perform(delete("/despliegues/{id}", testId)).andExpect(status().isNoContent());
 
     verify(service, times(1)).deleteDespliegue(testId);
   }
 
   @Test
-  @DisplayName("DELETE /despliegues/{id} - Debería retornar not found cuando no existe el despliegue")
+  @DisplayName(
+      "DELETE /despliegues/{id} - Debería retornar not found cuando no existe el despliegue")
   void testDeleteDespliegue_NotFound_ShouldReturnNotFound() throws Exception {
     when(service.deleteDespliegue(testId)).thenReturn(notFoundResponse);
 
-    mockMvc.perform(delete("/despliegues/{id}", testId))
+    mockMvc
+        .perform(delete("/despliegues/{id}", testId))
         .andExpect(status().isNotFound())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Despliegue no encontrado"));
@@ -225,11 +238,14 @@ class DespliegueControllerTest {
   }
 
   @Test
-  @DisplayName("DELETE /despliegues/{id} - Debería retornar internal server error cuando falla la eliminación")
+  @DisplayName(
+      "DELETE /despliegues/{id} - Debería retornar internal server error cuando falla la"
+          + " eliminación")
   void testDeleteDespliegue_Failure_ShouldReturnInternalServerError() throws Exception {
     when(service.deleteDespliegue(testId)).thenReturn(errorResponse);
 
-    mockMvc.perform(delete("/despliegues/{id}", testId))
+    mockMvc
+        .perform(delete("/despliegues/{id}", testId))
         .andExpect(status().isInternalServerError())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.message").value("Error interno"));

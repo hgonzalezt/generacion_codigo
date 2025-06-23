@@ -1,18 +1,19 @@
 package com.msa.historiasUsu_Resp.repository.model;
 
+import static jakarta.persistence.GenerationType.AUTO;
+import static lombok.AccessLevel.PRIVATE;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.experimental.FieldDefaults;
 import java.util.UUID;
-import static jakarta.persistence.GenerationType.AUTO;
-import static lombok.AccessLevel.PRIVATE;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "HistoriaUsu")
@@ -23,14 +24,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
 public class Historia {
-    @Id
-    @GeneratedValue(strategy = AUTO)
-    UUID id;
+  @Id
+  @GeneratedValue(strategy = AUTO)
+  UUID id;
 
-    UUID proyectoId;
-    UUID responsableId;
-    String descripcion;
-    Enum estado;
-
-
+  UUID proyectoId;
+  UUID responsableId;
+  String descripcion;
+  Enum estado;
 }

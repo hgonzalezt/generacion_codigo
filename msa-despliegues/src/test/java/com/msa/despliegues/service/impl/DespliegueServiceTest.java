@@ -1,8 +1,17 @@
 package com.msa.despliegues.service.impl;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import com.msa.despliegues.dto.GenericResponse;
 import com.msa.despliegues.repository.IDespliegueRepository;
 import com.msa.despliegues.repository.model.Despliegue;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,25 +20,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 @DisplayName("DespliegueService Tests")
 class DespliegueServiceTest {
 
-  @Mock
-  private IDespliegueRepository repository;
+  @Mock private IDespliegueRepository repository;
 
-  @InjectMocks
-  private DespliegueService service;
+  @InjectMocks private DespliegueService service;
 
   private UUID testId;
   private UUID proyectoId;
@@ -113,7 +110,8 @@ class DespliegueServiceTest {
 
     // Then
     assertNotNull(response);
-    assertEquals("No se encontraron despliegues para el proyectoId: " + proyectoId, response.getMessage());
+    assertEquals(
+        "No se encontraron despliegues para el proyectoId: " + proyectoId, response.getMessage());
     assertEquals(emptyList, response.getData());
     verify(repository, times(1)).getByProyectoId(proyectoId);
   }
@@ -146,7 +144,8 @@ class DespliegueServiceTest {
 
     // Then
     assertNotNull(response);
-    assertEquals("No se encontraron despliegues para el maquinaId: " + maquinaId, response.getMessage());
+    assertEquals(
+        "No se encontraron despliegues para el maquinaId: " + maquinaId, response.getMessage());
     assertEquals(emptyList, response.getData());
     verify(repository, times(1)).getByMaquinaId(maquinaId);
   }
