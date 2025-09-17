@@ -51,7 +51,8 @@ public class DespliegueController {
   }
 
   @PostMapping
-  public ResponseEntity<GenericResponse<Object>> createDespliegue(@RequestBody Despliegue despliegue) {
+  public ResponseEntity<GenericResponse<Object>> createDespliegue(
+      @RequestBody Despliegue despliegue) {
     GenericResponse<Object> response = service.createDespliegue(despliegue);
     if (response.getMessage().contains("exitosamente")) {
       return ResponseEntity.status(CREATED).body(response);
@@ -61,7 +62,8 @@ public class DespliegueController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<GenericResponse<Object>> updateDespliegue(@PathVariable UUID id, @RequestBody Despliegue despliegueDetails) {
+  public ResponseEntity<GenericResponse<Object>> updateDespliegue(
+      @PathVariable UUID id, @RequestBody Despliegue despliegueDetails) {
     GenericResponse<Object> response = service.updateDespliegue(id, despliegueDetails);
 
     if (response.getMessage().contains("exitosamente")) {

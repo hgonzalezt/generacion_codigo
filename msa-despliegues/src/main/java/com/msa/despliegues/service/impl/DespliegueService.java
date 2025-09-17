@@ -23,18 +23,12 @@ public class DespliegueService implements IDespliegueService {
 
   @Override
   public GenericResponse<Object> getAll() {
-    return GenericResponse.builder()
-        .data(repository.getAll())
-        .message("OK")
-        .build();
+    return GenericResponse.builder().data(repository.getAll()).message("OK").build();
   }
 
   @Override
   public GenericResponse<Object> getById(UUID id) {
-    return GenericResponse.builder()
-        .data(repository.getById(id))
-        .message("OK")
-        .build();
+    return GenericResponse.builder().data(repository.getById(id)).message("OK").build();
   }
 
   @Override
@@ -42,7 +36,10 @@ public class DespliegueService implements IDespliegueService {
     List<Despliegue> despliegues = repository.getByProyectoId(proyectoId);
     return GenericResponse.builder()
         .data(despliegues)
-        .message(despliegues.isEmpty() ? "No se encontraron despliegues para el proyectoId: " + proyectoId : "OK")
+        .message(
+            despliegues.isEmpty()
+                ? "No se encontraron despliegues para el proyectoId: " + proyectoId
+                : "OK")
         .build();
   }
 
@@ -51,7 +48,10 @@ public class DespliegueService implements IDespliegueService {
     List<Despliegue> despliegues = repository.getByMaquinaId(maquinaId);
     return GenericResponse.builder()
         .data(despliegues)
-        .message(despliegues.isEmpty() ? "No se encontraron despliegues para el maquinaId: " + maquinaId : "OK")
+        .message(
+            despliegues.isEmpty()
+                ? "No se encontraron despliegues para el maquinaId: " + maquinaId
+                : "OK")
         .build();
   }
 
@@ -59,9 +59,7 @@ public class DespliegueService implements IDespliegueService {
   @Transactional
   public GenericResponse<Object> createDespliegue(Despliegue despliegue) {
     if (despliegue.getProyectoId() == null || despliegue.getMaquinaId() == null) {
-      return GenericResponse.builder()
-          .message("proyectoId y maquinaId son requeridos")
-          .build();
+      return GenericResponse.builder().message("proyectoId y maquinaId son requeridos").build();
     }
 
     if (despliegue.getFechaDespliegue() == null) {
